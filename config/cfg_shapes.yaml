@@ -1,0 +1,45 @@
+defaults:
+  - _self_
+
+arch:
+  name: "recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1"
+  loss:
+    name: "losses@ACTLossHead"
+    loss_type: "softmax_cross_entropy"
+
+  hidden_size: 256
+  expansion: 2.0
+  num_heads: 4
+  pos_encodings: "rope"
+  L_layers: 2
+  H_layers: 1
+  H_cycles: 1
+  L_cycles: 2
+
+  halt_max_steps: 4
+  halt_exploration_prob: 0.1
+
+  puzzle_emb_ndim: 0
+  puzzle_emb_len: 0
+
+data_paths:
+  - "data/shapes_dataset"
+
+evaluators: []
+
+global_batch_size: 64
+epochs: 100
+eval_interval: 20
+
+lr: 5e-4
+lr_min_ratio: 0.1
+lr_warmup_steps: 100
+weight_decay: 0.01
+beta1: 0.9
+beta2: 0.999
+puzzle_emb_lr: 1e-4
+puzzle_emb_weight_decay: 0.0
+
+project_name: "shapes_project"
+run_name: "shapes_run"
+checkpoint_every_eval: true
