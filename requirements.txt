@@ -4,7 +4,6 @@ einops
 tqdm
 coolname
 pydantic
-argdantic
 wandb
 omegaconf
 hydra-core
