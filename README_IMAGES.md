@@ -8,7 +8,7 @@ This guide explains how to train the Tiny Recursion Model (TRM) on image-to-imag
 To test the pipeline, you can generate a synthetic dataset where the task is to transform a square into a circle with swapped colors.
 
 ```bash
-python dataset/generate_synthetic_shapes.py \
+python -m dataset/generate_synthetic_shapes \
   --output-dir data/shapes_raw \
   --num-train 1000 \
   --num-test 100 \
@@ -27,7 +27,7 @@ Convert your images into the tokenized format required by TRM.
 
 ```bash
 # Example for the synthetic shapes dataset
-python dataset/build_image_dataset.py \
+python -m dataset/build_image_dataset \
   --input-dir data/shapes_raw/train_input \
   --target-dir data/shapes_raw/train_target \
   --output-dir data/shapes_dataset \
@@ -45,7 +45,7 @@ This will generate `.npy` files and a `palette.json` in `data/shapes_dataset`.
 Launch the training using the provided configuration file (`config/cfg_shapes.yaml`). You can modify this file to adjust hyperparameters like `epochs` or `hidden_size`.
 
 ```bash
-python pretrain.py --config-name cfg_shapes
+python -m pretrain --config-name cfg_shapes
 ```
 *   Checkpoints will be saved in `checkpoints/shapes_project/shapes_run`.
 
@@ -53,7 +53,7 @@ python pretrain.py --config-name cfg_shapes
 To run the trained model on new images (which do not need to have matching targets):
 
 ```bash
-python inference_image.py \
+python -m inference_image \
   --model-dir checkpoints/shapes_project/shapes_run \
   --step 225 \
   --input-dir data/shapes_raw/test_input \
